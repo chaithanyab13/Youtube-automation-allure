@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+
+    <Properties>
+        <Property name="LOG_PATTERN">
+            %d{yyyy-MM-dd HH:mm:ss} [%t] %-5level %c{1} - %msg%n
+        </Property>
+        <Property name="LOG_DIR">Logs</Property>
+    </Properties>
+
+    <Appenders>
+
+        <!-- Console logging -->
+        <Console name="ConsoleAppender" target="SYSTEM_OUT">
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+        </Console>
+
+        <!-- File logging -->
+        <RollingFile name="FileAppender"
+                     fileName="${LOG_DIR}/automation.log"
+                     filePattern="${LOG_DIR}/automation-%d{yyyy-MM-dd}.log.gz"
+                     append="false">
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1"/>
+            </Policies>
+        </RollingFile>
+
+    </Appenders>
+
+    <Loggers>
+
+        <!-- Application logs -->
+        <Logger name="com.youtube.automation" level="debug" additivity="false">
+            <AppenderRef ref="ConsoleAppender"/>
+            <AppenderRef ref="FileAppender"/>
+        </Logger>
+
+        <!-- Reduce Selenium noise -->
+        <Logger name="org.openqa.selenium" level="warn"/>
+        <Logger name="org.testng" level="warn"/>
+
+        <Root level="info">
+            <AppenderRef ref="ConsoleAppender"/>
+            <AppenderRef ref="FileAppender"/>
+        </Root>
+
+    </Loggers>
+</Configuration>

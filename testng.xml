@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="YouTube Video Control Test Suite" parallel="methods">
+    <listeners>
+        <listener class-name="com.youtube.Listeners.ExtentTestListener"/>
+        <listener class-name="com.youtube.Listeners.TestListener"/>
+    </listeners>
+    <test verbose="2" preserve-order="true" name="YouTube Video Control Tests">
+        <parameter name="testUrl" value="https://www.youtube.com/watch?v=QCC9pkwvyaM&amp;sttick=0"/>
+        <parameter name="browserType" value="chrome"/>
+        <parameter name="headless" value="false"/>
+        <classes>
+            <class name="com.youtube.tests.YouTubeVideoControlTest">
+                <methods>
+                    <include name="testVideoPlayFunctionality"/>
+                    <include name="testVideoPauseFunctionality"/>
+                    <include name="testVideoSeekFunctionality"/>
+                    <include name="testFullScreenFunctionality"/>
+                    <include name="testVolumeSetControlFunctionality"/>
+                    <include name="testVideoMuteUnmuteFunctionality"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>
